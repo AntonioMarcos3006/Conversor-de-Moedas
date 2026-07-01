@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GlobalFX — Conversor de Moedas em Tempo Real</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%B1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">$</span>GLOBAL<strong>FX</strong></div>
+  <button id="themeToggle" class="icon-btn" aria-label="Alternar tema claro/escuro" title="Alternar tema">🌙</button>
+</header>
+
+<div class="ticker-wrap" aria-label="Cotações em destaque atualizadas automaticamente">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item">Carregando cotações em tempo real…</span>
+  </div>
+</div>
+
+<main class="layout">
+
+  <section class="converter-card glass" id="converterCard">
+    <div class="loading-bar" id="loadingBar"><span></span></div>
+    <div class="error-banner hidden" id="errorBanner"></div>
+
+    <div class="panel" data-side="from">
+      <div class="panel-label">Você tem</div>
+      <div class="panel-row">
+        <input type="number" id="amountInput" class="amount-input" placeholder="0,00" inputmode="decimal" min="0" step="any" value="100" aria-label="Valor a converter">
+        <button class="currency-select" id="fromBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="flag" id="fromFlag">🇺🇸</span><span class="code" id="fromCode">USD</span><span class="chev">▾</span>
+        </button>
+      </div>
+      <div class="dropdown-panel hidden" id="fromPanel" role="listbox">
+        <input type="text" class="dropdown-search" id="fromSearch" placeholder="Buscar moeda ou código…" aria-label="Buscar moeda de origem">
+        <div class="dropdown-list" id="fromList"></div>
+      </div>
+    </div>
+
+    <div class="swap-row">
+      <button class="swap-btn" id="swapBtn" type="button" aria-label="Inverter moedas">⇄</button>
+    </div>
+
+    <div class="panel" data-side="to">
+      <div class="panel-label">Você recebe</div>
+      <div class="panel-row">
+        <div class="result-display" id="resultDisplay">0,00</div>
+        <button class="currency-select" id="toBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="flag" id="toFlag">🇧🇷</span><span class="code" id="toCode">BRL</span><span class="chev">▾</span>
+        </button>
+      </div>
+      <div class="dropdown-panel hidden" id="toPanel" role="listbox">
+        <input type="text" class="dropdown-search" id="toSearch" placeholder="Buscar moeda ou código…" aria-label="Buscar moeda de destino">
+        <div class="dropdown-list" id="toList"></div>
+      </div>
+    </div>
+
+    <div class="rate-info" id="rateInfo">Carregando cotação…</div>
+    <div class="updated-info" id="updatedInfo"></div>
+
+    <div class="actions-row">
+      <button class="btn-primary" id="convertBtn" type="button">Converter</button>
+      <button class="btn-ghost" id="copyBtn" type="button">Copiar resultado</button>
+    </div>
+  </section>
+
+  <section class="history-card glass" id="historyCard">
+    <div class="history-head">
+      <h2>Histórico de conversões</h2>
+      <button class="link-btn" id="clearHistoryBtn" type="button">Limpar tudo</button>
+    </div>
+    <div class="history-list" id="historyList">
+      <p class="empty-state">Suas conversões aparecerão aqui.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  Cotações fornecidas por open.er-api.com (com fallback automático) · Atualização automática a cada 5 minutos
+</footer>
+
+<div class="toast" id="toast"><span class="dot"></span><span id="toastMsg"></span></div>
+
+<script src="script.js"></script>
+</body>
+</html>
